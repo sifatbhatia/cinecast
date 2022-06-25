@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL="http://localhost:5000/api/v1/list/"
+const API_URL="https://filtherv2.herokuapp.com/api/v1/list/"
 async function createTodo(location,weather,date) {
   const { data: newTodo } = await axios.post(API_URL, {
     location,

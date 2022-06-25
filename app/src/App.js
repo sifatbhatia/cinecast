@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Register from './Components/Register/Register';
 import Login from './Components/Login/Login';
 import Home from './Components/Home/Home';
@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <Switch>
+          <Routes>
             <Route path="/login">
               <Login />
             </Route>
@@ -40,7 +40,7 @@ function App() {
             <Route path="/">
               <Register />
             </Route>
-          </Switch>
+          </Routes>
         </div>
       </Router>
     </div>

@@ -1,11 +1,11 @@
 import React, { useState, setStatus } from "react";
 import "./Register.css";
 import Axios from "axios";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 function Register() {
-  const history = useHistory();
+  const history = useNavigate();
   const [status, setStatus] = useState(undefined);
   const [fullnameReg, setFullnameReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
@@ -13,7 +13,7 @@ function Register() {
 
   const register = (e) => {
    
-    Axios.post("http://localhost:5000/api/v1/register", {
+    Axios.post("https://filtherv2.herokuapp.com//api/v1/register", {
       fullName: fullnameReg,
       email: emailReg,
       password: passwordReg,

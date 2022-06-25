@@ -1,4 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Component }  from 'react';
+
 function NavBar() {
   var change = () => {
     var button = document.querySelectorAll(".navbar-burger", 0);

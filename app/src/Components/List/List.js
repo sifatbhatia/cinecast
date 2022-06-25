@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import APIHelper from "../../API_CRUD.js";
-import { ImCross } from "react-icons/all";
+import { ImCross } from "react-icons/im";
 import "./WeatherList.css";
 import Search from "../Search/Search";
 import WeatherCard from "../WeatherCard";

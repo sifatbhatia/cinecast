@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 function Login() {
   const [status, setStatus] = useState(undefined);
   const [emailReg, setEmailReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
-  const history = useHistory();
+  const history = useNavigate();
   const redirect = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:5000/api/v1/login", {
+    Axios.post("https://filtherv2.herokuapp.com//api/v1/login", {
       email: emailReg,
       password: passwordReg,
     })
@@ -25,7 +25,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div>
       {status?.type === "success" && <p>"Login success!"</p>}
       {status?.type === "error" && <p>"User doesn't exist"</p>}
       <div className="register weather container">
@@ -65,7 +65,7 @@ function Login() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
