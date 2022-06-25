@@ -1,0 +1,19 @@
+{
+  "name": "clean-up",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "api": "cd server && nodemon index.js",
+    "react": "cd app && npm run start",
+    "dev:react": "concurrently --raw \"npm run api\" \"npm run react\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^6.3.0",
+    "nodemon": "^2.0.14"
+  }
+}
