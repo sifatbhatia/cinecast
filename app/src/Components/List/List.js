@@ -138,7 +138,7 @@ function WeatherList() {
           <button className="button is-link" onClick={createTodo}>
             Add
           </button>
-          <table class="table">
+          <table className="table">
             <thead>
               <tr>
                 <th>Location</th>

@@ -47,7 +47,7 @@ function Login() {
           <label className="label">Password</label>
           <div className="control">
             <input
-              class="input"
+              className="input"
               type="password"
               name="password"
               onChange={(e) => {

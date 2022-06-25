@@ -1,5 +1,5 @@
 import NavBar from "../NavBar/NavBar";
-import React, { Component }  from 'react';
+import React  from 'react';
 import {AiOutlineMail} from "react-icons/ai";
 import {BiPhoneCall} from "react-icons/bi"
 function Contact() {

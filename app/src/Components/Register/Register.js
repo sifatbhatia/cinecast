@@ -1,4 +1,4 @@
-import React, { useState, setStatus } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import Axios from "axios";
 import { useNavigate } from 'react-router-dom';
@@ -64,7 +64,7 @@ function Register() {
         <label className="label">Password</label>
         <div className="control">
           <input
-            class="input"
+            className="input"
             type="password"
             name="password"
             onChange={(e) => {
