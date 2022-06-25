@@ -76,7 +76,7 @@ export default function WeatherSearch() {
       <h1 className="container is-size-1 has-text-weight-bold">
         Weather Search
       </h1>
-      <div className="dark:bg-black min-h-screen">
+      <div className=" min-h-screen">
         <main>
           <div className="mx-auto w-5/6 md:w-full 2xl:max-w-7xl xl:max-w-6xl">
             <Search

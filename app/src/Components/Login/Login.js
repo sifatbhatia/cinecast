@@ -9,7 +9,7 @@ function Login() {
   const history = useNavigate();
   const redirect = (e) => {
     e.preventDefault();
-    Axios.post("https://filtherv2.herokuapp.com//api/v1/login", {
+    Axios.post("https://filtherv2.herokuapp.com/api/v1/login", {
       email: emailReg,
       password: passwordReg,
     })
@@ -17,7 +17,7 @@ function Login() {
         setStatus({ type: "success" });
         console.log(response.data.message)
         localStorage.setItem("userName", response.data.message);
-        history.push("/home");
+        history("/home");
       })
       .catch((error) => {
         setStatus({ type: "error", error });

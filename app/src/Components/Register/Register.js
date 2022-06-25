@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Register() {
-  const history = useNavigate();
+  let navigate = useNavigate()
   const [status, setStatus] = useState(undefined);
   const [fullnameReg, setFullnameReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
@@ -13,7 +13,7 @@ function Register() {
 
   const register = (e) => {
    
-    Axios.post("https://filtherv2.herokuapp.com//api/v1/register", {
+    Axios.post("https://filtherv2.herokuapp.com/api/v1/register", {
       fullName: fullnameReg,
       email: emailReg,
       password: passwordReg,
@@ -83,7 +83,7 @@ function Register() {
           </button>
         </div>
         <div className="control">
-          <button className="button is-link is-light" onClick={ (e) => {e.preventDefault(); history.push('/login')}}>Login</button>
+          <button className="button is-link is-light" onClick={ (e) => {e.preventDefault();navigate("../login")}}>Login</button>
         </div>
       </div>
       </div>
