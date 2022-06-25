@@ -46,7 +46,7 @@ export default function WeatherSearch() {
   }, [debouncedSearchTerm]);
   
   const postHistory = async () => {
-    await Axios.post("http://localhost:5000/api/v1/history", {
+    await Axios.post("https://filtherv2.herokuapp.com/api/v1/history", {
       location: location,
     }).then((response) => {
       console.log(response.data);
@@ -57,7 +57,7 @@ export default function WeatherSearch() {
   
 
   const getHistory = async () => {
-      await Axios.get("http://localhost:5000/api/v1/history").then((response) => {
+      await Axios.get("https://filtherv2.herokuapp.com/api/v1/history").then((response) => {
         const locations = response.data;
         setLocations(locations)
       console.log(response.data);
@@ -65,7 +65,7 @@ export default function WeatherSearch() {
   };
   const clearHistory = async (e, id) => {
     e.stopPropagation();
-    await Axios.delete("http://localhost:5000/api/v1/history/").then((response) => {
+    await Axios.delete("https://filtherv2.herokuapp.com/api/v1/history/").then((response) => {
       setLocations(locations.filter(({ id: i }) => id !== i));
     });
   };
