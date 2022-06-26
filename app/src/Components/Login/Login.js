@@ -14,10 +14,17 @@ function Login() {
       password: passwordReg,
     })
       .then((response) => {
-        setStatus({ type: "success" });
-        console.log(response.data.message)
-        localStorage.setItem("userName", response.data.message);
-        history("/home");
+     
+        if (response.data.message ===  ", Welcome Back!") {
+          setStatus({ type: "error", response });
+
+        }
+        else {
+          setStatus({ type: "success" });
+          console.log(response.data.message)
+          localStorage.setItem("userName", response.data.message);
+          history("/home");
+        }
       })
       .catch((error) => {
         setStatus({ type: "error", error });
