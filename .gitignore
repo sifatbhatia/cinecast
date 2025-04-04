@@ -8,9 +8,10 @@
 
 # Local Netlify folder
 .netlify
+node_modules
 
 # dependencies
-
+/server/node_modules
 /.pnp
 .pnp.js
 

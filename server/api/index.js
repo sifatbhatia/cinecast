@@ -1,15 +1,10 @@
-const express = require("express");
-const listAApi = require("./list")
-const registerApi = require("./register");
-const loginApi = require("./login");
-const paymentApi = require("./payment");
-const historyApi = require("./history");
-
+const express = require('express');
 const router = express.Router();
-router.use(listAApi)
-router.use(registerApi);
-router.use(loginApi);
-router.use(paymentApi);
-router.use(historyApi);
+
+const weather = require('./weather');
+const auth = require('./auth');
+
+router.use('/weather', weather);
+router.use('/auth', auth);
 
 module.exports = router;

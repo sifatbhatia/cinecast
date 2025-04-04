@@ -1,55 +1,70 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-import Axios from "axios";
-function Login() {
-  const [status, setStatus] = useState(undefined);
-  const [emailReg, setEmailReg] = useState("");
-  const [passwordReg, setPasswordReg] = useState("");
-  const history = useNavigate();
-  const redirect = (e) => {
-    e.preventDefault();
-    Axios.post("https://filtherv2.herokuapp.com/api/v1/login", {
-      email: emailReg,
-      password: passwordReg,
-    })
-      .then((response) => {
-     
-        if (response.data.message ===  ", Welcome Back!") {
-          setStatus({ type: "error", response });
+import axios from "axios";
 
-        }
-        else {
-          setStatus({ type: "success" });
-          console.log(response.data.message)
-          localStorage.setItem("userName", response.data.message);
-          history("/home");
-        }
-      })
-      .catch((error) => {
-        setStatus({ type: "error", error });
+function Login() {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/v1/auth/login", {
+        email,
+        password,
       });
+
+      // Store the token in localStorage
+      localStorage.setItem("authToken", response.data.token);
+      localStorage.setItem("userName", response.data.user.displayName);
+      
+      // Redirect to home page
+      navigate("/home");
+    } catch (error) {
+      if (error.response?.data?.code === 'auth/user-not-found') {
+        setError("No account found with this email");
+      } else if (error.response?.data?.code === 'auth/wrong-password') {
+        setError("Incorrect password");
+      } else {
+        setError("Failed to log in. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div>
-      {status?.type === "success" && <p>"Login success!"</p>}
-      {status?.type === "error" && <p>"User doesn't exist"</p>}
-      <div className="register weather container">
-        <h1 className="title is-1">Login</h1>
+    <div className="login weather container">
+      <h1 className="title is-1">Login</h1>
+
+      {error && (
+        <div className="notification is-danger">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleLogin}>
         <div className="field">
           <label className="label">Email</label>
           <div className="control">
             <input
               className="input"
-              type="text"
+              type="email"
               name="email"
-              onChange={(e) => {
-                setEmailReg(e.target.value);
-              }}
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
+
         <div className="field">
           <label className="label">Password</label>
           <div className="control">
@@ -57,21 +72,35 @@ function Login() {
               className="input"
               type="password"
               name="password"
-              onChange={(e) => {
-                setPasswordReg(e.target.value);
-              }}
+              required
+              minLength="6"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
 
-        <div className="field">
+        <div className="field is-grouped">
           <div className="control">
-            <button className="button is-link is-dark" onClick={redirect}>
+            <button 
+              className={`button is-link ${loading ? 'is-loading' : ''}`}
+              type="submit"
+              disabled={loading}
+            >
               Login
             </button>
           </div>
+          <div className="control">
+            <button
+              className="button is-link is-light"
+              type="button"
+              onClick={() => navigate("/register")}
+            >
+              Register
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }

@@ -1,93 +1,117 @@
 import React, { useState } from "react";
 import "./Register.css";
-import Axios from "axios";
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-
 function Register() {
-  let navigate = useNavigate()
-  const [status, setStatus] = useState(undefined);
+  let navigate = useNavigate();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [fullnameReg, setFullnameReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
 
-  const register = (e) => {
-   
-    Axios.post("https://filtherv2.herokuapp.com/api/v1/register", {
-      fullName: fullnameReg,
-      email: emailReg,
-      password: passwordReg,
-    }).then(() => {
-      setStatus({ type: 'success' });
-    })
-    .catch((error) => {
-      setStatus({ type: 'error', error });
-    });
+  const register = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      await axios.post("http://localhost:5000/api/v1/auth/register", {
+        fullName: fullnameReg,
+        email: emailReg,
+        password: passwordReg,
+      });
+      
+      // Registration successful
+      navigate("/login");
+    } catch (error) {
+      if (error.response?.data?.code === 'EMAIL_EXISTS') {
+        setError("An account with this email already exists");
+      } else {
+        setError("Failed to create an account. Please try again.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-    {status?.type === 'success' && <p>"Registeration success!"</p>} 
-      {status?.type === 'error' && (
-        <p>"User already exists"</p>
-      )}
-      <div className="register weather container">
+    <div className="register weather container">
       <h1 className="title is-size-1">Register</h1>
 
-      <div className="field">
-        <label className="label">Full Name</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            name="fullname"
-            onChange={(e) => {
-              setFullnameReg(e.target.value);
-            }}
-          />
+      {error && (
+        <div className="notification is-danger">
+          {error}
         </div>
-      </div>
-      <div className="field">
-        <label className="label">Email</label>
-        <div className="control">
-          <input
-            className="input"
-            type="text"
-            name="email"
-            onChange={(e) => {
-              setEmailReg(e.target.value);
-            }}
-          />
-        </div>
-      </div>
-      <div className="field">
-        <label className="label">Password</label>
-        <div className="control">
-          <input
-            className="input"
-            type="password"
-            name="password"
-            onChange={(e) => {
-              setPasswordReg(e.target.value);
-            }}
-          />
-        </div>
-      </div>
+      )}
 
-      <div className="field is-grouped">
-        <div className="control">
-          <button className="button is-link" onClick={register}>
-           
-            Register
+      <form onSubmit={register}>
+        <div className="field">
+          <label className="label">Full Name</label>
+          <div className="control">
+            <input
+              className="input"
+              type="text"
+              name="fullname"
+              required
+              value={fullnameReg}
+              onChange={(e) => setFullnameReg(e.target.value)}
+            />
+          </div>
+        </div>
 
-          </button>
+        <div className="field">
+          <label className="label">Email</label>
+          <div className="control">
+            <input
+              className="input"
+              type="email"
+              name="email"
+              required
+              value={emailReg}
+              onChange={(e) => setEmailReg(e.target.value)}
+            />
+          </div>
         </div>
-        <div className="control">
-          <button className="button is-link is-light" onClick={ (e) => {e.preventDefault();navigate("../login")}}>Login</button>
+
+        <div className="field">
+          <label className="label">Password</label>
+          <div className="control">
+            <input
+              className="input"
+              type="password"
+              name="password"
+              required
+              minLength="6"
+              value={passwordReg}
+              onChange={(e) => setPasswordReg(e.target.value)}
+            />
+          </div>
         </div>
-      </div>
-      </div>
-    </>
+
+        <div className="field is-grouped">
+          <div className="control">
+            <button 
+              className={`button is-link ${loading ? 'is-loading' : ''}`} 
+              type="submit"
+              disabled={loading}
+            >
+              Register
+            </button>
+          </div>
+          <div className="control">
+            <button 
+              className="button is-link is-light" 
+              type="button"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 

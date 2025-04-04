@@ -4,13 +4,6 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-require('./auth/passport');
-
-require('./models/user');
-require('./models/list');
-require('./models/history');
-const middlewares = require('./middlewares');
-const api = require('./api');
 
 const app = express();
 
@@ -24,13 +17,18 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄',
+    message: 'CineCast API is running',
   });
 });
 
+// Import and use API routes
+const api = require('./api');
 app.use('/api/v1', api);
 
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
 
 module.exports = app;
