@@ -3,18 +3,39 @@
   "version": "1.0.0",
   "description": "Weather forecasting app tailored for cinematographers and film makers",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "api": "cd server && nodemon index.js",
-    "react": "cd app && npm run start",
+    "api:cjs": "cd server && nodemon server.cjs",
+    "react": "cd app && npm run dev",
     "start": "cd server && node index.js",
-    "dev:react": "concurrently --raw \"npm run api\" \"npm run react\""
+    "start:cjs": "cd server && node server.cjs",
+    "dev:react": "concurrently --raw \"npm run api\" \"npm run react\"",
+    "dev:react:cjs": "concurrently --raw \"npm run api:cjs\" \"npm run react\""
   },
-  "keywords": ["weather", "film", "cinematography", "photography", "forecast"],
+  "keywords": [
+    "weather",
+    "film",
+    "cinematography",
+    "photography",
+    "forecast"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^10.0.0",
     "concurrently": "^6.3.0",
-    "nodemon": "^2.0.14"
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "nodemon": "^2.0.14",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
   }
 }

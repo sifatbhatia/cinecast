@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import weather from './weather.js';
+import auth from './auth.js';
 
-const weather = require('./weather');
-const auth = require('./auth');
+const router = express.Router();
 
 router.use('/weather', weather);
 router.use('/auth', auth);
 
-module.exports = router;
+export default router;

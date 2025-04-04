@@ -1,5 +1,6 @@
-const express = require('express');
-const axios = require('axios');
+import express from 'express';
+import axios from 'axios';
+
 const router = express.Router();
 
 // Get detailed weather information for a location
@@ -69,4 +70,4 @@ router.get('/golden-hour/:lat/:lon', async (req, res) => {
   }
 });
 
-module.exports = router; 
+export default router; 

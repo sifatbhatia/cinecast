@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import { admin } from '../config/firebase.js';
+
 const router = express.Router();
-const { admin } = require('../config/firebase');
 
 // Middleware to verify Firebase token
 const verifyToken = async (req, res, next) => {
@@ -99,4 +100,4 @@ router.get('/profile', verifyToken, async (req, res) => {
   }
 });
 
-module.exports = router; 
+export default router; 

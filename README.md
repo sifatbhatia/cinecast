@@ -1,60 +1,73 @@
-# CineCast - Weather Forecasting for Film Makers
+# CineCast - Weather-Based Film Recommendations
 
-CineCast is a specialized weather application designed specifically for cinematographers and film makers. It provides detailed weather information crucial for film production, including golden hour timing, sun luminance, visibility conditions, and more.
+CineCast is a web application that provides film recommendations based on the current weather conditions. It helps filmmakers and movie enthusiasts find the perfect film to watch based on the weather outside.
 
 ## Features
 
-- Detailed Weather Information
-  - Sunset/Sunrise times
-  - Golden hour information
-  - Sun luminance data
-  - UV index and visibility conditions
-  - Weather conditions
-- Interactive Timeline
-  - Scrollable weather forecast
-  - Detailed hourly breakdown
-- Map Integration
-  - Location-based weather data
-  - Visual weather representation
+- Real-time weather data for any location
+- 5-day weather forecast
+- Film recommendations based on weather conditions
+- Responsive design for mobile and desktop
+- Dark/light mode support
 
 ## Tech Stack
 
-- Frontend: React.js with Tailwind CSS
-- Backend: Node.js/Express
-- Authentication: Firebase
-- API: OpenWeatherMap API
+- **Frontend**: React, Webpack, Babel
+- **Backend**: Node.js, Express
+- **Deployment**: Netlify (Frontend), Render (Backend)
+- **APIs**: Weather API, Movie Database API
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm (v6 or higher)
+
+### Installation
+
 1. Clone the repository
-2. Install dependencies:
-   ```bash
+   ```
+   git clone https://github.com/yourusername/cinecast.git
+   cd cinecast
+   ```
+
+2. Install dependencies for both frontend and backend
+   ```
+   # Install frontend dependencies
+   cd app
    npm install
-   cd app && npm install
-   ```
-3. Set up environment variables:
-   - Create `.env` file in the root directory
-   - Add your OpenWeatherMap API key
-   - Add your Firebase configuration
-4. Start the development server:
-   ```bash
-   npm run dev:react
+
+   # Install backend dependencies
+   cd ../server
+   npm install
    ```
 
-## Project Structure
+3. Start the development servers
+   ```
+   # Start the backend server
+   cd server
+   npm start
 
-```
-cinecast/
-├── app/                 # React frontend
-├── server/             # Node.js backend
-├── docs/              # Project documentation
-└── package.json       # Project configuration
-```
+   # Start the frontend development server
+   cd ../app
+   npm start
+   ```
 
-## Contributing
+4. Open your browser and navigate to `http://localhost:3001`
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+## Deployment
+
+The application is deployed at:
+- Frontend: [https://cinecast.netlify.app](https://cinecast.netlify.app)
+- Backend: [https://weather-app-backend-4a2p.onrender.com](https://weather-app-backend-4a2p.onrender.com)
 
 ## License
 
-This project is licensed under the ISC License.
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Weather data provided by OpenWeatherMap
+- Film data provided by TMDB
+- Icons from Weather Icons

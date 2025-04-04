@@ -1,9 +1,12 @@
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-require('dotenv').config();
+import express from 'express';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import dotenv from 'dotenv';
+import api from './api/index.js';
+
+dotenv.config();
 
 const app = express();
 
@@ -22,7 +25,6 @@ app.get('/', (req, res) => {
 });
 
 // Import and use API routes
-const api = require('./api');
 app.use('/api/v1', api);
 
 // Error handling middleware
@@ -31,4 +33,4 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-module.exports = app;
+export default app;

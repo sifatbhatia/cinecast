@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Backend server for CineCast weather forecasting app",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start:cjs": "node server.cjs",
+    "dev:cjs": "nodemon server.cjs"
   },
   "keywords": [],
   "author": "",
